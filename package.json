@@ -1,0 +1,19 @@
+{
+  "name": "appnotas",
+  "version": "1.0.0",
+  "description": "API REST Gestion de Notas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anagnz07/appnotas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anagnz07/appnotas/issues"
+  },
+  "homepage": "https://github.com/anagnz07/appnotas#readme"
+}
