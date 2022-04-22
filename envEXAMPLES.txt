@@ -1,0 +1,12 @@
+! Crear un archivo .env 
+! Agregar las siguientes variables
+! Añadir los respectivos valores
+
+
+/* MYSQL */
+
+MYSQL_HOST=
+MYSQL_USER=
+MYSQL_PASS=
+MYSQL_DATABASE=
+
