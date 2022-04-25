@@ -70,7 +70,24 @@ const login = async (req, res, next) => {
   }
 };
 
+const logout = async (req, res, next) => {
+  const conexion = await getConnection();
+  try {
+    const { username } = req.auth;
+    await conexion.query(`update users set logged = false where username=?`, [
+      username,
+    ]);
+    logger.info("SERVER", `${username} desconectado`);
+    res.send({ message: "Logout" });
+  } catch (error) {
+    next(error);
+  } finally {
+    if (conexion) conexion.release();
+  }
+};
+
 module.exports = {
   register,
   login,
+  logout,
 };
