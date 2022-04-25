@@ -3,12 +3,13 @@ const express = require("express");
 const app = express();
 const logger = require("npmlog");
 const morgan = require("morgan");
-const { register } = require("./controllers/userControllers");
+const { register, login } = require("./controllers/userControllers");
 // middlewares
 app.use(morgan("dev"));
 app.use(express.json());
 // routes
 app.post("/register", register);
+app.post("/login", login);
 
 //errors 404
 app.use((req, res) => {

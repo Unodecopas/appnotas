@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { getConnection } = require("./db");
 const logger = require("npmlog");
+const bcrypt = require("bcrypt");
 const { random } = require("lodash");
 const faker = require("faker/locale/es");
 let connection;
@@ -68,20 +69,22 @@ async function main() {
 
     //admin users
     logger.info(__filename, "- Creando administradores");
+    const pass = bcrypt.hashSync("eres", 10);
     await connection.query(
       `
             insert into users
             (username, password, name, lastname, role, email)
             values
-            ("unodecopas", "eres", "Jesus", "Gallardo", "admin", "gallardo@correo.com")
+            ("unodecopas", "${pass}", "Jesus", "Gallardo", "admin", "gallardo@correo.com")
             `
     );
+    const passAna = bcrypt.hashSync("green", 10);
     await connection.query(
       `
             insert into users
             (username, password, name, lastname, role, email)
             values
-            ("nitagreen", "green", "Ana", "Gonzalez", "admin", "green@correo.com")
+            ("nitagreen", "${passAna}", "Ana", "Gonzalez", "admin", "green@correo.com")
             `
     );
 

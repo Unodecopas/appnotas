@@ -1,9 +1,10 @@
 require("dotenv").config();
 const logger = require("npmlog");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const { generateError } = require("../helpers");
 const { getConnection } = require("../database/db");
-const { registerSchema } = require("../schemas/userSchemas");
+const { registerSchema, loginSchema } = require("../schemas/userSchemas");
 
 const register = async (req, res, next) => {
   const conexion = await getConnection();
@@ -36,7 +37,40 @@ const register = async (req, res, next) => {
     if (conexion) conexion.release();
   }
 };
+const login = async (req, res, next) => {
+  const conexion = await getConnection();
+  try {
+    await loginSchema.validateAsync(req.body);
+    const { username, password } = req.body;
+    const [user] = await conexion.query(
+      `select * from users where username = ?`,
+      [username]
+    );
+    if (user.length == 0) throw generateError(409, "No existe ese usuario");
+
+    const encPassword = await bcrypt.compare(password, user[0].password);
+    if (!encPassword) throw generateError(403, "La contraseña no coincide");
+    await conexion.query(`update users set logged = 1 where username=?`, [
+      user[0].username,
+    ]);
+    const tokenInfo = {
+      username: user[0].username,
+      role: user[0].role,
+      userID: user[0].id,
+    };
+    const token = jwt.sign(tokenInfo, process.env.SECRETWORD, {
+      expiresIn: "30d",
+    });
+    res.send({ token });
+  } catch (error) {
+    logger.error(error);
+    next(error);
+  } finally {
+    if (conexion) conexion.release();
+  }
+};
 
 module.exports = {
   register,
+  login,
 };
