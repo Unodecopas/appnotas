@@ -3,7 +3,7 @@
 ! Añadir los respectivos valores
 
 
-/* MYSQL */
+# MYSQL 
 
 MYSQL_HOST=
 MYSQL_USER=
