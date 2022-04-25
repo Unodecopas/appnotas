@@ -4,7 +4,7 @@ const { generateError } = require("../helpers");
 const registerSchema = Joi.object().keys({
   username: Joi.string()
     .required()
-    .min(4)
+    .min(3)
     .error(
       generateError(400, "Campo USUARIO debe tener al menos 4 caracteres")
     ),
