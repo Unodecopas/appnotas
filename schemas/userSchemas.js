@@ -29,7 +29,18 @@ const registerSchema = Joi.object().keys({
       generateError(400, "Campo LASTNAME debe tener al menos 4 caracteres")
     ),
 });
+const loginSchema = Joi.object().keys({
+  username: Joi.string()
+    .required()
+    .min(3)
+    .error(generateError(400, "Usuario vacio")),
+  password: Joi.string()
+    .min(4)
+    .required()
+    .error(generateError(400, "Contraseña vacia")),
+});
 
 module.exports = {
   registerSchema,
+  loginSchema,
 };
