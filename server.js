@@ -4,7 +4,13 @@ const app = express();
 const logger = require("npmlog");
 const morgan = require("morgan");
 const { register, login, logout } = require("./controllers/userControllers");
+const {
+  createCategory,
+  editCategory,
+  deleteCategory,
+} = require("./controllers/categoriesControllers");
 const { isAuth } = require("./middlewares/isAuth");
+const { categoryExists } = require("./middlewares/categoryExists");
 // middlewares
 app.use(morgan("dev"));
 app.use(express.json());
@@ -14,6 +20,9 @@ app.post("/register", register);
 app.post("/login", login);
 app.patch("/logout", isAuth, logout);
 
+app.post("/category", isAuth, createCategory);
+app.patch("/category/:name", categoryExists, isAuth, editCategory);
+app.delete("/category/:name", categoryExists, isAuth, deleteCategory);
 //errors 404
 app.use((req, res) => {
   res.status(404).send({
