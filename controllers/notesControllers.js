@@ -40,4 +40,25 @@ const getNote = async (req, res, next) => {
     }
 };
 
-module.exports = { getNotes, getNote };
+const createNote = async (req, res, next) => {
+    const conexion = await getConnection();
+    try {
+        const { id } = req.info;
+        const { title, description, category } = req.body;
+        await conexion.query(
+            `
+              insert into notes (title, description, categoryID, userID,createdAt)
+              values
+              (?,?,?,?,UTC_TIMESTAMP)
+              `,
+            [title, description, category, id]
+        );
+        res.send({ message: "nota creada correctamente" });
+    } catch (error) {
+        next(error);
+    } finally {
+        if (conexion) conexion.release();
+    }
+};
+
+module.exports = { getNotes, getNote, createNote };

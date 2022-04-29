@@ -16,7 +16,11 @@ const userExists = require("./middlewares/userExists");
 
 const hasPrivileges = require("./middlewares/hasPrivileges");
 
-const { getNotes, getNote } = require("./controllers/notesControllers");
+const {
+    getNotes,
+    getNote,
+    createNote,
+} = require("./controllers/notesControllers");
 
 // middlewares
 app.use(morgan("dev"));
@@ -28,6 +32,7 @@ app.post("/login", login);
 app.patch("/logout", isAuth, logout);
 app.get("/:username", userExists, isAuth, hasPrivileges, getNotes);
 app.get("/:username/:noteID", userExists, noteExists, getNote);
+app.post("/:username", userExists, isAuth, createNote);
 app.post("/category", isAuth, createCategory);
 app.patch("/category/:name", categoryExists, isAuth, editCategory);
 app.delete("/category/:name", categoryExists, isAuth, deleteCategory);
