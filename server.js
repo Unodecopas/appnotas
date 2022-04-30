@@ -10,12 +10,17 @@ const {
   deleteCategory,
 } = require("./controllers/categoriesControllers");
 const { isAuth } = require("./middlewares/isAuth");
-const { categoryExists } = require("./middlewares/categoryExists");
-
-const hasPrivileges = require("./middlewares/hasPrivileges");
+const categoryExists = require("./middlewares/categoryExists");
+const noteExists = require("./middlewares/noteExists");
 const userExists = require("./middlewares/userExists");
 
-const { getNotes } = require("./controllers/notesControllers");
+const hasPrivileges = require("./middlewares/hasPrivileges");
+
+const {
+    getNotes,
+    getNote,
+    createNote,
+} = require("./controllers/notesControllers");
 
 const swaggerUI = require("swagger-ui-express");
 const YAML = require("yamljs");
@@ -31,6 +36,8 @@ app.post("/register", register);
 app.post("/login", login);
 app.patch("/logout", isAuth, logout);
 app.get("/:username", userExists, isAuth, hasPrivileges, getNotes);
+app.get("/:username/:noteID", userExists, noteExists, getNote);
+app.post("/:username", userExists, isAuth, createNote);
 app.post("/category", isAuth, createCategory);
 app.patch("/category/:name", categoryExists, isAuth, editCategory);
 app.delete("/category/:name", categoryExists, isAuth, deleteCategory);
