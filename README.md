@@ -18,3 +18,15 @@ públicas sólo se puede acceder si se conoce la URL.
 - Eliminar una nota
 - Crear, editar y borrar categorías
 - Imagen: poder asociar una imagen (única) a cada nota
+
+## SCRIPTS
+
+- Instalación:
+    ``` npm install ```
+
+- Iniciar servidor:
+    ```npm run dev ```
+
+- Swagger:
+    ``` http://localhost:4000/api-docs ```
+    
