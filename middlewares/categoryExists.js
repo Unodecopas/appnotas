@@ -14,6 +14,7 @@ const categoryExists = async (req, res, next) => {
     if (name.length == 0)
       throw generateError(404, `La categoria ${name} no existe`);
     req.info = { categoryID: category.id };
+    next();
   } catch (error) {
     next(error);
   } finally {

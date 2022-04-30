@@ -1,0 +1,290 @@
+
+openapi: "3.0.0"
+info:
+  title: Note Management
+  description: Documentation for API REST Note Management
+  version: 1.0
+  license: apache-2.0
+schemes: [http]
+paths:
+  /register:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                name:
+                  type: string
+                lastname:
+                  type: string
+              example:
+                username: unodecopas
+                password: password
+                email: correo@correo.com
+                name: Jesus
+                lastname: Gallardo
+      summary: Register an user into DDBB
+      description: 
+      responses:
+        200:
+          description: Success
+        409:
+          description: User already exists
+      tags: [Users]
+
+  /login:
+    post:
+      summary: Login user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: 
+                  type: string
+                password:
+                  type: string
+              example:
+                username: username
+                password: password
+      responses:
+        200:
+          description: Returns a token
+          content:
+            application/json:
+              schema:
+                type: object
+              parameters:
+                token:
+                  type: string
+              example:
+                token: asdadadakjsdka23234234234234
+        401:
+          description: User not exists
+        403:
+          description: Password is invalid
+      tags: [Users]
+
+  /logout:
+    patch:
+      summary: require(auth)  //  Logout user
+      parameters:
+        - in: header
+          name: Token
+          schema:
+            type: string
+          required: true
+          description: Logout user with token
+      responses:
+        200:
+          description: Logout successfuly
+        409:
+          description: Token is invalid
+      tags: [Users]
+
+  /category:
+    post:
+      summary: require(auth, admin)  //  Create category
+      parameters:
+        - in: header
+          name: token
+          schema:
+            type: string
+          required: true
+          description: token login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              example:
+                name: example
+      responses:
+        200:
+          description: Success
+        403:
+          description: You dont have permissions
+        409: 
+          description: Category already exists
+      tags: [Category]
+  /category/{name}:
+    patch:
+      summary: require(auth, admin)  //  Update category
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: Edit category name
+      responses:
+        200:
+          description: Success
+        403:
+          description: You dont have permissions
+        404:
+          description: Not found
+        409:
+          description: Category dont exists
+      tags: [Category]
+    delete:
+      summary: require(auth, admin)  //  Delete a category
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: Delete category
+      responses:
+        200:
+          description: Success
+        403:
+          description: You dont have permissions
+        404:
+          description: Not found
+      tags: [Category]
+
+  /{yourUsername}:
+    get:
+      summary: require(auth)  //  Get your notes list
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: your Username
+        - in: header
+          name: token
+          schema:
+            type: string
+          required: true
+          description: Header authorization
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title: 
+                      type: string
+                  example:
+                    title: Note title
+        404:
+          description: Not found
+        403:
+          description: Dont have permissions
+        409:
+          description: Authentication failed
+      tags: [Notes]
+
+  /{username}/{noteID}:
+    get:
+      summary: Returns a note
+      parameters:
+        - in: path
+          name: username
+          schema: 
+            type: string
+          required: true
+          description: username 
+        - in: path
+          name: noteID
+          schema: 
+            type: integer
+          required: true
+          description: Note ID 
+      responses:
+        200:
+          description: Get the note from user
+          content:
+            application/json:
+              schema:
+                type: object
+              properties:
+                title: 
+                  type: string
+                description:
+                  type: string
+                category:
+                  type: string
+                createdAt:
+                  type: string
+              example:
+                title: Note title
+                description: A note paragraph
+                category: example category name
+                createdAt: 01/01/2022
+        404:
+          description: Not found
+      tags: [Notes]
+  
+  /{username}:
+    post:
+      summary: require(auth)  //  Create a note  
+      parameters:
+        - in: path
+          name: username
+          schema: 
+            type: string
+          required: true
+        - in: header
+          name: token
+          schema: 
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                categoryID:
+                  type: integer
+              example:
+                title: Note title
+                description: Note paragraph
+                categoryID: 1
+      responses:
+        200:
+          description: Note created successfuly
+        403:
+          description: You dont have permissions
+        
+      tags: [Notes]
+
+
+
+
+
+
+                
+
+tags:
+  - name: Users
+    description: "All users endpoints"
+  - name: Category
+    description: "All categories endpoints"
+  - name: Notes
+    description: "All notes endpoints"
