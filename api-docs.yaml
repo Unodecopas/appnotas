@@ -59,6 +59,15 @@ paths:
       responses:
         200:
           description: Returns a token
+          content:
+            application/json:
+              schema:
+                type: object
+              parameters:
+                token:
+                  type: string
+              example:
+                token: asdadadakjsdka23234234234234
         401:
           description: User not exists
         403:
@@ -66,8 +75,8 @@ paths:
       tags: [Users]
 
   /logout:
-    put:
-      summary: Logout user
+    patch:
+      summary: require(auth)  //  Logout user
       parameters:
         - in: header
           name: Token
@@ -75,11 +84,23 @@ paths:
             type: string
           required: true
           description: Logout user with token
+      responses:
+        200:
+          description: Logout successfuly
+        409:
+          description: Token is invalid
       tags: [Users]
 
   /category:
     post:
-      summary: Create category
+      summary: require(auth, admin)  //  Create category
+      parameters:
+        - in: header
+          name: token
+          schema:
+            type: string
+          required: true
+          description: token login
       requestBody:
         content:
           application/json:
@@ -93,12 +114,14 @@ paths:
       responses:
         200:
           description: Success
+        403:
+          description: You dont have permissions
         409: 
           description: Category already exists
       tags: [Category]
   /category/{name}:
     patch:
-      summary: Update category
+      summary: require(auth, admin)  //  Update category
       parameters:
         - in: path
           name: name
@@ -109,13 +132,15 @@ paths:
       responses:
         200:
           description: Success
+        403:
+          description: You dont have permissions
         404:
           description: Not found
         409:
           description: Category dont exists
       tags: [Category]
     delete:
-      summary: Delete a category
+      summary: require(auth, admin)  //  Delete a category
       parameters:
         - in: path
           name: name
@@ -126,12 +151,15 @@ paths:
       responses:
         200:
           description: Success
+        403:
+          description: You dont have permissions
         404:
           description: Not found
       tags: [Category]
-  /{yourUserName}:
+
+  /{yourUsername}:
     get:
-      summary: Get your notes list
+      summary: require(auth)  //  Get your notes list
       parameters:
         - in: path
           name: username
@@ -159,12 +187,98 @@ paths:
                       type: string
                   example:
                     title: Note title
-
         404:
           description: Not found
         403:
           description: Dont have permissions
+        409:
+          description: Authentication failed
       tags: [Notes]
+
+  /{username}/{noteID}:
+    get:
+      summary: Returns a note
+      parameters:
+        - in: path
+          name: username
+          schema: 
+            type: string
+          required: true
+          description: username 
+        - in: path
+          name: noteID
+          schema: 
+            type: integer
+          required: true
+          description: Note ID 
+      responses:
+        200:
+          description: Get the note from user
+          content:
+            application/json:
+              schema:
+                type: object
+              properties:
+                title: 
+                  type: string
+                description:
+                  type: string
+                category:
+                  type: string
+                createdAt:
+                  type: string
+              example:
+                title: Note title
+                description: A note paragraph
+                category: example category name
+                createdAt: 01/01/2022
+        404:
+          description: Not found
+      tags: [Notes]
+  
+  /{username}:
+    post:
+      summary: require(auth)  //  Create a note  
+      parameters:
+        - in: path
+          name: username
+          schema: 
+            type: string
+          required: true
+        - in: header
+          name: token
+          schema: 
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                categoryID:
+                  type: integer
+              example:
+                title: Note title
+                description: Note paragraph
+                categoryID: 1
+      responses:
+        200:
+          description: Note created successfuly
+        403:
+          description: You dont have permissions
+        
+      tags: [Notes]
+
+
+
+
+
+
                 
 
 tags:

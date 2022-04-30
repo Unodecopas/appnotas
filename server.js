@@ -10,16 +10,16 @@ const {
   deleteCategory,
 } = require("./controllers/categoriesControllers");
 const { isAuth } = require("./middlewares/isAuth");
-const categoryExists = require("./middlewares/categoryExists");
+const { categoryExists } = require("./middlewares/categoryExists");
 const noteExists = require("./middlewares/noteExists");
 const userExists = require("./middlewares/userExists");
 
 const hasPrivileges = require("./middlewares/hasPrivileges");
 
 const {
-    getNotes,
-    getNote,
-    createNote,
+  getNotes,
+  getNote,
+  createNote,
 } = require("./controllers/notesControllers");
 
 const swaggerUI = require("swagger-ui-express");
@@ -29,7 +29,7 @@ const swaggerJsDocs = YAML.load("./api-docs.yaml");
 // middlewares
 app.use(morgan("dev"));
 app.use(express.json());
-app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 
 // routes
 app.post("/register", register);
