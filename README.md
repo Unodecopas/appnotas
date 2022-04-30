@@ -22,6 +22,8 @@ públicas sólo se puede acceder si se conoce la URL.
 ## SCRIPTS
 
 - Instalación:
+
+
     ``` npm install ```
 
 - Iniciar servidor:
@@ -29,4 +31,3 @@ públicas sólo se puede acceder si se conoce la URL.
 
 - Swagger:
     ``` http://localhost:4000/api-docs ```
-    
