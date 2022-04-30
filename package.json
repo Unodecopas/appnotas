@@ -28,7 +28,9 @@
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
-    "npmlog": "^6.0.2"
+    "npmlog": "^6.0.2",
+    "swagger-ui-express": "^4.3.0",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "eslint": "^8.14.0",

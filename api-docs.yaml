@@ -1,0 +1,176 @@
+
+openapi: "3.0.0"
+info:
+  title: Note Management
+  description: Documentation for API REST Note Management
+  version: 1.0
+  license: apache-2.0
+schemes: [http]
+paths:
+  /register:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                name:
+                  type: string
+                lastname:
+                  type: string
+              example:
+                username: unodecopas
+                password: password
+                email: correo@correo.com
+                name: Jesus
+                lastname: Gallardo
+      summary: Register an user into DDBB
+      description: 
+      responses:
+        200:
+          description: Success
+        409:
+          description: User already exists
+      tags: [Users]
+
+  /login:
+    post:
+      summary: Login user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: 
+                  type: string
+                password:
+                  type: string
+              example:
+                username: username
+                password: password
+      responses:
+        200:
+          description: Returns a token
+        401:
+          description: User not exists
+        403:
+          description: Password is invalid
+      tags: [Users]
+
+  /logout:
+    put:
+      summary: Logout user
+      parameters:
+        - in: header
+          name: Token
+          schema:
+            type: string
+          required: true
+          description: Logout user with token
+      tags: [Users]
+
+  /category:
+    post:
+      summary: Create category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              example:
+                name: example
+      responses:
+        200:
+          description: Success
+        409: 
+          description: Category already exists
+      tags: [Category]
+  /category/{name}:
+    patch:
+      summary: Update category
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: Edit category name
+      responses:
+        200:
+          description: Success
+        404:
+          description: Not found
+        409:
+          description: Category dont exists
+      tags: [Category]
+    delete:
+      summary: Delete a category
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: Delete category
+      responses:
+        200:
+          description: Success
+        404:
+          description: Not found
+      tags: [Category]
+  /{yourUserName}:
+    get:
+      summary: Get your notes list
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: your Username
+        - in: header
+          name: token
+          schema:
+            type: string
+          required: true
+          description: Header authorization
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title: 
+                      type: string
+                  example:
+                    title: Note title
+
+        404:
+          description: Not found
+        403:
+          description: Dont have permissions
+      tags: [Notes]
+                
+
+tags:
+  - name: Users
+    description: "All users endpoints"
+  - name: Category
+    description: "All categories endpoints"
+  - name: Notes
+    description: "All notes endpoints"
