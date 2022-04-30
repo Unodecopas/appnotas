@@ -13,6 +13,7 @@ const { isAuth } = require("./middlewares/isAuth");
 const { categoryExists } = require("./middlewares/categoryExists");
 const noteExists = require("./middlewares/noteExists");
 const userExists = require("./middlewares/userExists");
+const { isAdmin } = require("./middlewares/isAdmin");
 
 const hasPrivileges = require("./middlewares/hasPrivileges");
 
@@ -38,9 +39,9 @@ app.patch("/logout", isAuth, logout);
 app.get("/:username", userExists, isAuth, hasPrivileges, getNotes);
 app.get("/:username/:noteID", userExists, noteExists, getNote);
 app.post("/:username", userExists, isAuth, createNote);
-app.post("/category", isAuth, createCategory);
-app.patch("/category/:name", categoryExists, isAuth, editCategory);
-app.delete("/category/:name", categoryExists, isAuth, deleteCategory);
+app.post("/category", isAuth, isAdmin, createCategory);
+app.patch("/category/:name", categoryExists, isAuth, isAdmin, editCategory);
+app.delete("/category/:name", categoryExists, isAuth, isAdmin, deleteCategory);
 
 //errors 404
 app.use((req, res) => {
