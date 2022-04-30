@@ -27,4 +27,4 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = { isAuth };
+module.exports = { isAdmin };
