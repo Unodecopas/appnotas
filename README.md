@@ -24,14 +24,14 @@ públicas sólo se puede acceder si se conoce la URL.
 - Instalación:
 
 
-    ``` npm install ```
+        npm install
 
 - Iniciar servidor:
 
 
-    ```npm run dev ```
+        npm run dev
 
 - Swagger:
 
 
-    ``` http://localhost:4000/api-docs ```
+        http://localhost:4000/api-docs
