@@ -61,4 +61,24 @@ const createNote = async (req, res, next) => {
     }
 };
 
-module.exports = { getNotes, getNote, createNote };
+const deleteNote = async (req, res, next) => {
+    const conexion = await getConnection();
+    try {
+        const { noteID } = req.params;
+        const { id } = req.info;
+        await conexion.query(`delete from notes where id=? and userID=?`, [
+            noteID,
+            id,
+        ]);
+
+        res.send({ message: "Nota borrada" });
+        logger.info("deleteNote", "Nota borrada");
+    } catch (error) {
+        logger.error(error);
+        next(error);
+    } finally {
+        if (conexion) conexion.release();
+    }
+};
+
+module.exports = { getNotes, getNote, createNote, deleteNote };
