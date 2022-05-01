@@ -81,4 +81,37 @@ const deleteNote = async (req, res, next) => {
     }
 };
 
-module.exports = { getNotes, getNote, createNote, deleteNote };
+const setPublic = async (req, res, next) => {
+    const conexion = await getConnection();
+    try {
+        const { noteID } = req.params;
+        const { userID } = req.auth;
+        const [note] = await conexion.query(
+            `select * from notes where id =? and userID=?`,
+            [noteID, userID]
+        );
+        if (note.length == 0) throw generateError(404, "Not found");
+        if (note[0].public == false) {
+            await conexion.query(
+                `update notes set public = true where id = ? and userID=?`,
+                [noteID, userID]
+            );
+            logger.info("setPublic", "Nota publica");
+            res.send({ message: "La nota ahora es publica" });
+        } else {
+            await conexion.query(
+                `update notes set public = false where id = ? and userID=?`,
+                [noteID, userID]
+            );
+            logger.info("setPublic", "Nota privada");
+            res.send({ message: "La nota ahora es privada" });
+        }
+    } catch (error) {
+        logger.error(error);
+        next(error);
+    } finally {
+        if (conexion) conexion.release();
+    }
+};
+
+module.exports = { getNotes, getNote, createNote, deleteNote, setPublic };
