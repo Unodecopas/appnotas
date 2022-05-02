@@ -34,7 +34,7 @@ públicas sólo se puede acceder si se conoce la URL.
 - Swagger:
 
 
-        http://localhost:4000/
+        http://localhost:4000/api-docs
 
 
 ## PREVIEW

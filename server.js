@@ -32,7 +32,7 @@ const swaggerJsDocs = YAML.load("./api-docs.yaml");
 // middlewares
 app.use(morgan("dev"));
 app.use(express.json());
-app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 
 // routes
 app.post("/register", register);
