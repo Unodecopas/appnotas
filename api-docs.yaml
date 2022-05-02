@@ -236,7 +236,7 @@ paths:
           description: Not found
       tags: [Notes]
     patch:
-      summary: Update note
+      summary: require(auth)  //  Update note
       parameters:
         - in: path
           name: username
@@ -279,7 +279,29 @@ paths:
         409:
           description: Unauthorized
       tags: [Notes]
-  
+    delete:
+      summary: require(auth)  // Delete a note
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: noteID
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success
+        404:
+          description: Not found
+        403:
+          description: Forbidden
+        409:
+          description: Unauthorized
+      tags: [Notes]
   /{username}:
     post:
       summary: require(auth)  //  Create a note  
