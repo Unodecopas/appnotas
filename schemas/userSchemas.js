@@ -20,8 +20,8 @@ const registerSchema = Joi.object().keys({
     .error(generateError(400, "Debe introducir un email valido")),
   name: Joi.string()
     .required()
-    .min(4)
-    .error(generateError(400, "Campo NAME debe tener al menos 4 caracteres")),
+    .min(3)
+    .error(generateError(400, "Campo NAME debe tener al menos 3 caracteres")),
   lastname: Joi.string()
     .required()
     .min(4)
