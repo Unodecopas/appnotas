@@ -26,6 +26,13 @@ públicas sólo se puede acceder si se conoce la URL.
 
         npm install
 
+- Crear variables de entorno, creando archivo .env (se proporcina un archivo envEXAMPLES con lo requerido)
+
+
+- Creación base de datos e introducir datos de prueba:
+
+        npm run resetDB
+
 - Iniciar servidor:
 
 
@@ -37,6 +44,6 @@ públicas sólo se puede acceder si se conoce la URL.
         http://localhost:4000/api-docs
 
 
-## PREVIEW
+## ENDPOINTS
 
 <img src="./images/swagger-list.png" alt="preview">
