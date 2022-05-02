@@ -35,3 +35,8 @@ públicas sólo se puede acceder si se conoce la URL.
 
 
         http://localhost:4000/api-docs
+
+
+## PREVIEW
+
+<img src="./images/swagger-list.png" alt="preview">
