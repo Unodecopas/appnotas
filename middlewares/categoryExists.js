@@ -11,9 +11,9 @@ const categoryExists = async (req, res, next) => {
       `select * from categories where name =?`,
       [name]
     );
-    if (name.length == 0)
+    if (category.length == 0)
       throw generateError(404, `La categoria ${name} no existe`);
-    req.info = { categoryID: category.id };
+    req.info = { categoryID: category[0].id };
     next();
   } catch (error) {
     next(error);

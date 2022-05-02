@@ -157,18 +157,18 @@ paths:
           description: Not found
       tags: [Category]
 
-  /{yourUsername}:
+  /users/{yourUsername}:
     get:
       summary: require(auth)  //  Get your notes list
       parameters:
         - in: path
-          name: username
+          name: yourUsername
           schema:
             type: string
           required: true
           description: your Username
         - in: header
-          name: token
+          name: Authorization
           schema:
             type: string
           required: true
@@ -195,7 +195,7 @@ paths:
           description: Authentication failed
       tags: [Notes]
 
-  /{username}/{noteID}:
+  /users/{username}/{noteID}:
     get:
       summary: Returns a note
       parameters:
@@ -302,7 +302,7 @@ paths:
         409:
           description: Unauthorized
       tags: [Notes]
-  /{username}:
+  /users/{username}:
     post:
       summary: require(auth)  //  Create a note  
       parameters:
