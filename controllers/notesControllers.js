@@ -8,7 +8,7 @@ const getNotes = async (req, res, next) => {
     try {
         const { id } = req.info;
         const [notes] = await conexion.query(
-            "select title, description, img, createdAt, categories.name from notes inner join categories on notes.categoryID = categories.id where userID=?",
+            "select title, description, img, categories.name from notes inner join categories on notes.categoryID = categories.id where userID=?",
             [id]
         );
         res.send(notes[0]);
@@ -47,9 +47,9 @@ const createNote = async (req, res, next) => {
         const { title, description, category } = req.body;
         await conexion.query(
             `
-              insert into notes (title, description, categoryID, userID,createdAt)
+              insert into notes (title, description, categoryID, userID)
               values
-              (?,?,?,?,UTC_TIMESTAMP)
+              (?,?,?,?)
               `,
             [title, description, category, id]
         );

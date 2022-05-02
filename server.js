@@ -38,18 +38,18 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 app.post("/register", register);
 app.post("/login", login);
 app.patch("/logout", isAuth, logout);
-app.get("/:username", userExists, isAuth, hasPrivileges, getNotes);
-app.post("/:username", userExists, isAuth, createNote);
-app.get("/:username/:noteID", userExists, noteExists, getNote);
+app.get("/users/:username", userExists, isAuth, hasPrivileges, getNotes);
+app.post("/users/:username", userExists, isAuth, createNote);
+app.get("/users/:username/:noteID", userExists, noteExists, getNote);
 app.patch(
-    "/:username/:noteID",
+    "/:username/:noteID/public",
     userExists,
     noteExists,
     isAuth,
     hasPrivileges,
     setPublic
 );
-app.delete("/:username/:noteID", userExists, isAuth, hasPrivileges, deleteNote);
+app.delete("users/:username/:noteID", userExists, isAuth, hasPrivileges, deleteNote);
 app.post("/category", isAuth, isAdmin, createCategory);
 app.patch("/category/:name", categoryExists, isAuth, isAdmin, editCategory);
 app.delete("/category/:name", categoryExists, isAuth, isAdmin, deleteCategory);
