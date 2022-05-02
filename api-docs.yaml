@@ -129,6 +129,16 @@ paths:
             type: string
           required: true
           description: Edit category name
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              example:
+                name: Updated name category
       responses:
         200:
           description: Success
@@ -234,6 +244,8 @@ paths:
                 createdAt: 01/01/2022
         404:
           description: Not found
+        403:
+          description: Note is not public
       tags: [Notes]
     patch:
       summary: require(auth)  //  Update note
@@ -292,6 +304,11 @@ paths:
           required: true
           schema:
             type: integer
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: Success
