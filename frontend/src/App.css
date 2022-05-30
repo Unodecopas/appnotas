@@ -28,3 +28,17 @@ body {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.App main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+.App form {
+  display: flex;
+  flex-direction: column;
+}
+.form-control {
+  width: 90%;
+  height: fit-content;
+  border: 2px solid blue;
+}
