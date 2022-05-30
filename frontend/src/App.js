@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import HomePage from "./pages/HomePage";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">Header</header>
+      <Header />
       <main>
         <Routes>
           <Route path="/*" element={<HomePage />} />
