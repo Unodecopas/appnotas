@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useUser } from "../context/userContext";
 
 const RegisterForm = () => {
@@ -9,11 +9,32 @@ const RegisterForm = () => {
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [user] = useUser();
+  const navigate = useNavigate();
 
   if (user) return <Navigate to="/" />;
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:4000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password, email, name, lastname }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <section className="form-control">
-      <form>
+      <form onSubmit={handleRegister}>
         <label htmlFor="username">
           <input
             type="text"
