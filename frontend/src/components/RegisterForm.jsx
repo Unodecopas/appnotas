@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useUser } from "../context/userContext";
 
 const RegisterForm = () => {
   const [username, setUsername] = useState("");
@@ -7,7 +8,9 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
+  const [user] = useUser();
 
+  if (user) return <Navigate to="/" />;
   return (
     <section className="form-control">
       <form>

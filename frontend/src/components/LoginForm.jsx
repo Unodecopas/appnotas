@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useUser } from "../context/userContext";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [user] = useUser();
+  if (user) return <Navigate to="/" />;
   return (
     <section className="form-control">
       <form>
