@@ -5,11 +5,31 @@ import { useUser } from "../context/userContext";
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user] = useUser();
+  const [user, setUser] = useUser();
   if (user) return <Navigate to="/" />;
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:4000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+        setUser(data);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <section className="form-control">
-      <form>
+      <form onSubmit={handleLogin}>
         <label htmlFor="username">
           <input
             type="text"
