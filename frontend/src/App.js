@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
@@ -15,6 +16,7 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }
