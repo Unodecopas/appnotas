@@ -1,15 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../context/userContext";
 
 const Header = () => {
-  const [user] = useUser();
-  return (
-    <header className="App-header">
-      <h1>Notes</h1>
-      {user ? <p>{user.username}</p> : <Link to="/login">Login</Link>}
-    </header>
-  );
+    const [user, setUser, logout] = useUser();
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        await logout();
+        navigate("/login");
+    };
+
+    return (
+        <header className="App-header">
+            <h1>Notes</h1>
+            {user ? <p>{user.username}</p> : <Link to="/login">Login</Link>}
+            <button onClick={handleLogout}>Logout</button>
+        </header>
+    );
 };
 
 export default Header;
