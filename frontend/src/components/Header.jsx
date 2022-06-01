@@ -14,8 +14,14 @@ const Header = () => {
     return (
         <header className="App-header">
             <h1>Notes</h1>
-            {user ? <p>{user.username}</p> : <Link to="/login">Login</Link>}
-            <button onClick={handleLogout}>Logout</button>
+            {user ? (
+                <>
+                    <p>{user.username}</p>
+                    <button onClick={handleLogout}>Logout</button>
+                </>
+            ) : (
+                <Link to="/login">Login</Link>
+            )}
         </header>
     );
 };
