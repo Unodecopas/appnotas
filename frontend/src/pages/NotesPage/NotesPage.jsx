@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useUser } from "../context/userContext";
+import React, { useState, useEffect } from "react";
+import { useUser } from "../../context/userContext";
 
-const HomePage = () => {
+const NotesPage = () => {
     const [notes, setNotes] = useState([]);
     const [user] = useUser();
 
@@ -11,8 +11,8 @@ const HomePage = () => {
                 const res = await fetch(
                     `http://localhost:4000/users/${user.username}`,
                     {
+                        "Content-Type": "application/json",
                         headers: {
-                            "Content-Type": "application/json",
                             Authorization: user.token,
                         },
                     }
@@ -33,6 +33,7 @@ const HomePage = () => {
 
     return (
         <section>
+            <h1>Notas</h1>
             {notes.map((note) => {
                 return <li key={note.id}>{note.title}</li>;
             })}
@@ -40,4 +41,4 @@ const HomePage = () => {
     );
 };
 
-export default HomePage;
+export default NotesPage;

@@ -1,0 +1,17 @@
+.header-container {
+    min-height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+
+    padding: 0 5rem;
+}
+
+.header-container__user-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
