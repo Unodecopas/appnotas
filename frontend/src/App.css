@@ -35,11 +35,14 @@ body {
 }
 
 .App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  color: var(--text-color);
-  background-color: var(--app-bg-color);
+
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+    background-color: var(--app-bg-color);
+
 }
 
 .App h1 {

@@ -11,7 +11,11 @@ const HomePage = () => {
                 <NotesPage />
             ) : (
                 <div className="home-page">
-                    <h1>Welcome</h1>
+                    <h1>
+                        <span className="Accesibles">Accesibles</span>
+                        <span className="Simples">Simples</span>
+                        <span className="Rapidas">Rapidas </span>
+                    </h1>
                 </div>
             )}
         </>
