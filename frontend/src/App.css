@@ -32,17 +32,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--app-bg-color);
 }
 
 .App {
-
-
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    color: var(--text-color);
-    background-color: var(--app-bg-color);
-
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+  background-color: var(--app-bg-color);
 }
 
 .App h1 {

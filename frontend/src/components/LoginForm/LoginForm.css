@@ -3,9 +3,14 @@
   flex-direction: column;
   gap: 10px;
   border: 1px solid black;
-  margin-top: 2rem;
   margin-bottom: 1rem;
-  background-color: rgb(42, 41, 41);
+  background: rgb(21, 21, 22);
+  background: linear-gradient(
+    138deg,
+    rgba(21, 21, 22, 0.9402354691876751) 0%,
+    rgba(7, 7, 24, 1) 52%,
+    rgba(14, 18, 19, 1) 100%
+  );
   border: 2px solid rgba(238, 238, 238, 0.513);
   border-radius: 10px;
   padding: 3rem;
@@ -20,15 +25,16 @@
 .form-control input:-webkit-autofill:hover,
 .form-control input:-webkit-autofill:focus,
 .form-control input:-webkit-autofill:active {
-  -webkit-text-fill-color: black;
-  transition: background-color black;
+  -webkit-text-fill-color: var(--text-color-active);
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
 }
 .form-control button {
-  background-color: var(--app-bg-color);
+  background-color: var(--text-color-active);
+  color: var(--app-bg-color);
 }
 .form-control button:hover {
-  background-color: #ccc;
-  color: black;
+  background-color: var(--app-bg-color);
+  color: var(--text-color-active);
 }
 .form-control input:focus {
   box-shadow: 1px 1px 10px inset white;
