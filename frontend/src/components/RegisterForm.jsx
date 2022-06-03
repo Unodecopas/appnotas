@@ -8,6 +8,7 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
+  const [error, setError] = useState("");
   const [user] = useUser();
   const navigate = useNavigate();
 
@@ -27,14 +28,19 @@ const RegisterForm = () => {
         const data = await res.json();
         console.log(data);
         navigate("/login");
+      } else {
+        const err = await res.json();
+        setError(err.message);
+        console.log(err.message);
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
   return (
-    <section className="form-control">
-      <form onSubmit={handleRegister}>
+    <section className="form">
+      {error && <span>{error}</span>}
+      <form onSubmit={handleRegister} className="form-control">
         <label htmlFor="username">
           <input
             type="text"
