@@ -4,10 +4,10 @@
   gap: 10px;
   border: 1px solid black;
   margin-bottom: 1rem;
-  background: rgb(47, 47, 50);
+  background: rgb(21, 21, 22);
   background: linear-gradient(
     138deg,
-    rgba(47, 47, 50, 0.8758096988795518) 0%,
+    rgba(21, 21, 22, 0.9402354691876751) 0%,
     rgba(7, 7, 24, 1) 52%,
     rgba(14, 18, 19, 1) 100%
   );
@@ -29,7 +29,8 @@
   -webkit-box-shadow: 0 0 0px 1000px #000 inset;
 }
 .form-control button {
-  background-color: var(--app-bg-color);
+  background-color: var(--text-color-active);
+  color: var(--app-bg-color);
 }
 .form-control button:hover {
   background-color: #ccc;
