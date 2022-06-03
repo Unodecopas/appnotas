@@ -3,9 +3,14 @@
   flex-direction: column;
   gap: 10px;
   border: 1px solid black;
-  margin-top: 2rem;
   margin-bottom: 1rem;
-  background-color: rgb(42, 41, 41);
+  background: rgb(47, 47, 50);
+  background: linear-gradient(
+    138deg,
+    rgba(47, 47, 50, 0.8758096988795518) 0%,
+    rgba(7, 7, 24, 1) 52%,
+    rgba(14, 18, 19, 1) 100%
+  );
   border: 2px solid rgba(238, 238, 238, 0.513);
   border-radius: 10px;
   padding: 3rem;
