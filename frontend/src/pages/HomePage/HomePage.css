@@ -1,3 +1,35 @@
-.home-page {
-    color: red;
+.home-page h1 {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    text-align: center;
+    font-size: 100px;
+    font-weight: 800;
+    letter-spacing: -0.07em;
+    margin: 0 0 17px;
+}
+
+.Accesibles,
+.Simples,
+.Rapidas {
+    color: #fff;
+    background: linear-gradient(80deg, #09f, #00dfd8);
+    display: block;
+    line-height: 1.1;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0 12px;
+}
+
+.Simples {
+    background: linear-gradient(90deg, #7928ca, #ff0080);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.Rapidas {
+    background: linear-gradient(90deg, #f72121, #f9cb28);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
