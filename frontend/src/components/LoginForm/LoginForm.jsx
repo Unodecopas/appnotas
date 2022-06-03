@@ -6,6 +6,7 @@ import "./LoginForm.css";
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [user, setUser] = useUser();
 
   if (user) return <Navigate to="/" />;
@@ -24,6 +25,10 @@ const LoginForm = () => {
         const data = await res.json();
         console.log(data);
         setUser(data);
+      } else {
+        const err = await res.json();
+        setError(err.message);
+        console.log(err.message);
       }
     } catch (error) {
       console.log(error.message);
@@ -32,6 +37,8 @@ const LoginForm = () => {
 
   return (
     <section className="form">
+      {error && <span>{error}</span>}
+
       <form className="form-control" onSubmit={handleLogin}>
         <label htmlFor="username">
           <input
