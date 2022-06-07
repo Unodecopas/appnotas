@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useUser } from "../../context/userContext";
 import "./notesPage.css";
 const NotesPage = () => {
     const [notes, setNotes] = useState([]);
     const [user] = useUser();
+    const formRef = useRef();
 
     const getNotes = useCallback(async () => {
         try {
@@ -39,7 +40,10 @@ const NotesPage = () => {
             },
             body: JSON.stringify(Object.fromEntries(data)),
         })
-            .then(() => getNotes())
+            .then(() => {
+                getNotes();
+                formRef.current.reset();
+            })
             .catch((error) => console.error(error.message));
     };
 
@@ -52,7 +56,7 @@ const NotesPage = () => {
     return (
         <div className="notes-page">
             <section className="create-note-section">
-                <form onSubmit={createNote} method="POST">
+                <form onSubmit={createNote} method="POST" ref={formRef}>
                     <input name="title" placeholder="Añade un titulo" />
                     <select
                         name="category"
