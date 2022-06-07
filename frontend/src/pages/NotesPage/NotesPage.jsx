@@ -10,6 +10,7 @@ const NotesPage = () => {
             const res = await fetch(
                 `http://localhost:4000/users/${user.username}`,
                 {
+                    method: "GET",
                     "Content-Type": "application/json",
                     headers: {
                         Authorization: user.token,
