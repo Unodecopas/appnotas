@@ -3,6 +3,21 @@ const logger = require("npmlog");
 const { generateError } = require("../helpers");
 const { getConnection } = require("../database/db");
 
+const getCategories = async (req, res, next) => {
+  const conexion = await getConnection();
+  try {
+    const [categories] = await conexion.query(`
+      select * from categories
+    `);
+    res.send(categories);
+  } catch (error) {
+    logger.error(error);
+    next(error);
+  } finally {
+    if (conexion) conexion.release();
+  }
+};
+
 const createCategory = async (req, res, next) => {
   const conexion = await getConnection();
   try {
@@ -53,4 +68,5 @@ module.exports = {
   createCategory,
   editCategory,
   deleteCategory,
+  getCategories,
 };

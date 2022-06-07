@@ -9,6 +9,7 @@ const {
   createCategory,
   editCategory,
   deleteCategory,
+  getCategories,
 } = require("./controllers/categoriesControllers");
 const { isAuth } = require("./middlewares/isAuth");
 const { categoryExists } = require("./middlewares/categoryExists");
@@ -58,6 +59,7 @@ app.delete(
   hasPrivileges,
   deleteNote
 );
+app.get("/category", getCategories);
 app.post("/category", isAuth, isAdmin, createCategory);
 app.patch("/category/:name", categoryExists, isAuth, isAdmin, editCategory);
 app.delete("/category/:name", categoryExists, isAuth, isAdmin, deleteCategory);
