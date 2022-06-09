@@ -29,18 +29,13 @@ const NoteForm = (props) => {
     }, [getCategoriesList]);
 
     useEffect(() => {
-        if (props.selectedNote && categoriesList) {
+        if (props.selectedNote) {
             setTitle(props.selectedNote.title);
             setDescription(props.selectedNote.description);
-            setCategory(
-                categoriesList.find(
-                    (categoryItem) =>
-                        props.selectedNote.name === categoryItem.name
-                ).id
-            );
+            setCategory(props.selectedNote.categoryId);
         }
         return () => {};
-    }, [props.selectedNote, categoriesList]);
+    }, [props.selectedNote]);
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);

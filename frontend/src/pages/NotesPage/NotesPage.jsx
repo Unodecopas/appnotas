@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import Modal from "../../components/Modal/Modal";
 import NoteForm from "../../components/NoteForm/NoteForm";
 import { useUser } from "../../context/userContext";
+import { getCategoryColor } from "../../utils/utils";
 import "./notesPage.css";
 const NotesPage = () => {
     const [notes, setNotes] = useState([]);
@@ -56,8 +57,8 @@ const NotesPage = () => {
     }, [user, getNotes]);
 
     useEffect(() => {
-        console.log(selectedNote);
-    }, [selectedNote]);
+        console.log(notes);
+    }, [notes]);
 
     const closeModal = () => {
         setModalVisible(false);
@@ -80,13 +81,25 @@ const NotesPage = () => {
                         return (
                             <li
                                 key={note.id}
-                                className={`note ${note.name}`}
+                                className="note"
+                                style={{
+                                    border: `2px solid var(${getCategoryColor(
+                                        note.categoryId
+                                    )})`,
+                                }}
                                 onClick={() => handleNoteClick(note)}
                             >
                                 <h2>{note.title}</h2>
                                 <p>{note.description}</p>
-                                <button disabled className={note.name}>
-                                    {note.name}
+                                <button
+                                    disabled
+                                    style={{
+                                        backgroundColor: `var(${getCategoryColor(
+                                            note.categoryId
+                                        )})`,
+                                    }}
+                                >
+                                    {note.categoryName}
                                 </button>
                             </li>
                         );
@@ -94,7 +107,11 @@ const NotesPage = () => {
                 </ul>
             </section>
 
-            <Modal visible={modalVisible} handleClose={closeModal}>
+            <Modal
+                visible={modalVisible}
+                handleClose={closeModal}
+                borderColor={getCategoryColor(selectedNote?.categoryId)}
+            >
                 <NoteForm
                     onSubmit={createNote}
                     selectedNote={selectedNote}

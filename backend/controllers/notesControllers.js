@@ -8,7 +8,7 @@ const getNotes = async (req, res, next) => {
     try {
         const { id } = req.info;
         const [notes] = await conexion.query(
-            "select notes.id, title, description, img, categories.name from notes inner join categories on notes.categoryID = categories.id where userID=?",
+            "select notes.id, title, description, img, categories.name AS categoryName, categories.id AS categoryId from notes inner join categories on notes.categoryID = categories.id where userID=?",
             [id]
         );
         res.send(notes);
