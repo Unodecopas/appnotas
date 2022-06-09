@@ -14,9 +14,12 @@
     --work-color-1: hsl(27, 100%, 75%);
     --work-color-2: hsl(27, 100%, 60%);
     --work-color-3: hsl(27, 100%, 25%);
-    --todo-color-1: hsl(0, 100%, 75%);
-    --todo-color-2: hsl(0, 100%, 60%);
-    --todo-color-3: hsl(0, 100%, 25%);
+    --important-color-1: hsl(0, 100%, 75%);
+    --important-color-2: hsl(0, 100%, 60%);
+    --important-color-3: hsl(0, 100%, 25%);
+    --react-color-1: hsl(202, 100%, 75%);
+    --react-color-2: hsl(202, 100%, 60%);
+    --react-color-3: hsl(202, 100%, 25%);
 
     --modal-bg: linear-gradient(
         138deg,

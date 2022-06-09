@@ -6,6 +6,7 @@ import "./notesPage.css";
 const NotesPage = () => {
     const [notes, setNotes] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
+    const [selectedNote, setSelectedNote] = useState(null);
     const [user] = useUser();
 
     const getNotes = useCallback(async () => {
@@ -48,15 +49,24 @@ const NotesPage = () => {
             .catch((error) => console.error(error.message));
     };
 
-    const closeModal = () => {
-        setModalVisible(false);
-    };
-
     useEffect(() => {
         if (user) {
             getNotes();
         }
     }, [user, getNotes]);
+
+    useEffect(() => {
+        console.log(selectedNote);
+    }, [selectedNote]);
+
+    const closeModal = () => {
+        setModalVisible(false);
+    };
+
+    const handleNoteClick = (selectedNote) => {
+        setModalVisible(true);
+        setSelectedNote(selectedNote);
+    };
 
     return (
         <div className="notes-page">
@@ -71,7 +81,7 @@ const NotesPage = () => {
                             <li
                                 key={note.id}
                                 className={`note ${note.name}`}
-                                onClick={() => setModalVisible(true)}
+                                onClick={() => handleNoteClick(note)}
                             >
                                 <h2>{note.title}</h2>
                                 <p>{note.description}</p>
@@ -85,7 +95,10 @@ const NotesPage = () => {
             </section>
 
             <Modal visible={modalVisible} handleClose={closeModal}>
-                <NoteForm onSubmit={createNote}></NoteForm>
+                <NoteForm
+                    onSubmit={createNote}
+                    selectedNote={selectedNote}
+                ></NoteForm>
             </Modal>
         </div>
     );

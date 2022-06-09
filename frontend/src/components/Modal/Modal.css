@@ -14,7 +14,7 @@
 
 .modal {
     background: var(--modal-bg);
-    border: 1px solid red;
+    border: px solid red;
     height: 500px;
     width: 500px;
     position: absolute;
