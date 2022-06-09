@@ -1,42 +1,37 @@
 .form-control {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border: 1px solid black;
-  margin-bottom: 1rem;
-  background: rgb(21, 21, 22);
-  background: linear-gradient(
-    138deg,
-    rgba(21, 21, 22, 0.9402354691876751) 0%,
-    rgba(7, 7, 24, 1) 52%,
-    rgba(14, 18, 19, 1) 100%
-  );
-  border: 2px solid rgba(238, 238, 238, 0.513);
-  border-radius: 10px;
-  padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid black;
+    margin-bottom: 1rem;
+    background: rgb(21, 21, 22);
+    background: var(--modal-bg);
+    border: 0.5px solid rgba(238, 238, 238, 0.301);
+    border-radius: 5px;
+    padding: 3rem;
 }
 .form-control input {
-  background-color: black;
-  border: 1px solid grey;
-  color: #ccc;
-  text-align: center;
+    background-color: black;
+    border: 0.5px solid grey;
+    color: #ccc;
+    text-align: center;
 }
 .form-control input:-webkit-autofill,
 .form-control input:-webkit-autofill:hover,
 .form-control input:-webkit-autofill:focus,
 .form-control input:-webkit-autofill:active {
-  -webkit-text-fill-color: var(--text-color-active);
-  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+    -webkit-text-fill-color: var(--text-color-active);
+    -webkit-box-shadow: 0 0 0px 1000px #000 inset;
 }
 .form-control button {
-  background-color: var(--text-color-active);
-  color: var(--app-bg-color);
+    background-color: var(--text-color-active);
+    color: var(--app-bg-color);
 }
 .form-control button:hover {
-  background-color: var(--app-bg-color);
-  color: var(--text-color-active);
+    background-color: var(--app-bg-color);
+    color: var(--text-color-active);
 }
 .form-control input:focus {
-  box-shadow: 1px 1px 10px inset white;
-  background-color: black;
+    box-shadow: 1px 1px 10px 0px inset #ffffff5c;
+    background-color: black;
 }

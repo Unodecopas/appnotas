@@ -17,6 +17,13 @@
     --todo-color-1: hsl(0, 100%, 75%);
     --todo-color-2: hsl(0, 100%, 60%);
     --todo-color-3: hsl(0, 100%, 25%);
+
+    --modal-bg: linear-gradient(
+        138deg,
+        rgba(21, 21, 22, 1) 0%,
+        rgba(7, 7, 24, 1) 52%,
+        rgba(14, 18, 19, 1) 100%
+    );
 }
 
 * {

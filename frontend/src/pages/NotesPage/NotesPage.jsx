@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
+import Modal from "../../components/Modal/Modal";
+import NoteForm from "../../components/NoteForm/NoteForm";
 import { useUser } from "../../context/userContext";
 import "./notesPage.css";
 const NotesPage = () => {
     const [notes, setNotes] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
     const [user] = useUser();
-    const formRef = useRef();
 
     const getNotes = useCallback(async () => {
         try {
@@ -42,9 +44,12 @@ const NotesPage = () => {
         })
             .then(() => {
                 getNotes();
-                formRef.current.reset();
             })
             .catch((error) => console.error(error.message));
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
     };
 
     useEffect(() => {
@@ -56,29 +61,18 @@ const NotesPage = () => {
     return (
         <div className="notes-page">
             <section className="create-note-section">
-                <form onSubmit={createNote} method="POST" ref={formRef}>
-                    <input name="title" placeholder="Añade un titulo" />
-                    <select
-                        name="category"
-                        placeholder="Selecciona una categoria"
-                    >
-                        <option value="1">Node</option>
-                        <option value="2">React</option>
-                        <option value="3">MySql</option>
-                    </select>
-                    <input
-                        name="description"
-                        placeholder="Añade una descripcion"
-                    />
-                    <button type="submit">Añadir</button>
-                </form>
+                <NoteForm onSubmit={createNote}></NoteForm>
             </section>
 
             <section className="notes-list">
                 <ul>
                     {notes.map((note) => {
                         return (
-                            <li key={note.id} className={`note ${note.name}`}>
+                            <li
+                                key={note.id}
+                                className={`note ${note.name}`}
+                                onClick={() => setModalVisible(true)}
+                            >
                                 <h2>{note.title}</h2>
                                 <p>{note.description}</p>
                                 <button disabled className={note.name}>
@@ -89,6 +83,10 @@ const NotesPage = () => {
                     })}
                 </ul>
             </section>
+
+            <Modal visible={modalVisible} handleClose={closeModal}>
+                <NoteForm onSubmit={createNote}></NoteForm>
+            </Modal>
         </div>
     );
 };

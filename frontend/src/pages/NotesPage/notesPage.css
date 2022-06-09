@@ -49,8 +49,11 @@
 .note.NODE {
     border: 2px solid rgb(40, 233, 82);
 }
+.note.REACT {
+    border: 2px solid rgb(72, 175, 235);
+}
 button.REACT {
-    background-color: 2px solid rgb(72, 175, 235);
+    background-color: rgb(72, 175, 235);
     color: white;
 }
 
