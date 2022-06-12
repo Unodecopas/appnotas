@@ -1,4 +1,4 @@
-const Joi = require("Joi");
+const Joi = require("joi");
 const { generateError } = require("../helpers");
 
 const registerSchema = Joi.object().keys({
