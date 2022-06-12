@@ -74,10 +74,6 @@ const NotesPage = () => {
     }
   }, [user, getNotes]);
 
-  useEffect(() => {
-    console.log(notes);
-  }, [notes]);
-
   const closeModal = () => {
     setModalVisible(false);
   };
