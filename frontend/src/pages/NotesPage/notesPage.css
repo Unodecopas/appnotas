@@ -54,6 +54,17 @@
 .note.REACT {
   border: 2px solid rgb(72, 175, 235);
 }
+
+.note button.delete-button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.buttons-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 button.REACT {
   background-color: rgb(72, 175, 235);
 }

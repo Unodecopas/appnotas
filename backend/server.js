@@ -53,7 +53,7 @@ app.patch(
   setPublic
 );
 app.delete(
-  "users/:username/:noteID",
+  "/users/:username/:noteID",
   userExists,
   isAuth,
   hasPrivileges,
