@@ -14,7 +14,7 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4000/login", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
