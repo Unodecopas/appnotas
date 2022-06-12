@@ -111,7 +111,7 @@ async function main() {
 
     //categories
     logger.info(__filename, "Creando categorias");
-    const categoriesNames = ["NODE", "REACT", "MySQL"];
+    const categoriesNames = ["TODO", "PERSONAL", "IMPORTANTE", "TRABAJO"];
     for (let i = 0; i < categoriesNames.length; i++) {
       await connection.query(
         `
@@ -132,7 +132,7 @@ async function main() {
       const title = faker.lorem.sentence();
       const description = faker.lorem.sentence();
       const userID = Math.floor(Math.random() * 5 + 1);
-      const categoryID = Math.floor(Math.random() * 3 + 1);
+      const categoryID = Math.floor(Math.random() * 4 + 1);
 
       await connection.query(
         `
