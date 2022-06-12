@@ -8,7 +8,7 @@ const NoteForm = (props) => {
 
   const getCategoriesList = useCallback(async () => {
     try {
-      const res = await fetch(`http://localhost:4000/category`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/category`, {
         method: "GET",
         "Content-Type": "application/json",
       });

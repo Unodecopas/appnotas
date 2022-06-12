@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Modal from "../../components/Modal/Modal";
 import NoteForm from "../../components/NoteForm/NoteForm";
 import { useUser } from "../../context/userContext";
@@ -13,13 +13,16 @@ const NotesPage = () => {
 
   const getNotes = useCallback(async () => {
     try {
-      const res = await fetch(`http://localhost:4000/users/${user.username}`, {
-        method: "GET",
-        "Content-Type": "application/json",
-        headers: {
-          Authorization: user.token,
-        },
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND}/users/${user.username}`,
+        {
+          method: "GET",
+          "Content-Type": "application/json",
+          headers: {
+            Authorization: user.token,
+          },
+        }
+      );
       if (res.ok) {
         const data = await res.json();
 
@@ -34,7 +37,7 @@ const NotesPage = () => {
     e.preventDefault();
     const data = new FormData(e.target);
 
-    await fetch(`http://localhost:4000/users/${user.username}`, {
+    await fetch(`${process.env.REACT_APP_BACKEND}/users/${user.username}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,13 +52,16 @@ const NotesPage = () => {
   };
 
   const deleteNote = async (noteId) => {
-    await fetch(`http://localhost:4000/users/${user.username}/${noteId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: user.token,
-      },
-    })
+    await fetch(
+      `${process.env.REACT_APP_BACKEND}/users/${user.username}/${noteId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: user.token,
+        },
+      }
+    )
       .then(() => {
         getNotes();
       })
@@ -68,6 +74,10 @@ const NotesPage = () => {
     }
   }, [user, getNotes]);
 
+  useEffect(() => {
+    console.log(notes);
+  }, [notes]);
+
   const closeModal = () => {
     setModalVisible(false);
   };
@@ -77,8 +87,8 @@ const NotesPage = () => {
     setSelectedNote(selectedNote);
   };
 
-  const handleDeleteButton = (event, noteId) => {
-    event.stopPropagation();
+  const handleDeleteButton = (e, noteId) => {
+    e.stopPropagation();
     deleteNote(noteId);
   };
 

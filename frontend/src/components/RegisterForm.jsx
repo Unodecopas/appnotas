@@ -17,7 +17,7 @@ const RegisterForm = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4000/register", {
+      const res = await fetch("${process.env.REACT_APP_BACKEND}/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
