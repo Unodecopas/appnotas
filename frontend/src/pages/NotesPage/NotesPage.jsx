@@ -108,6 +108,23 @@ const NotesPage = () => {
     e.stopPropagation();
     deleteNote(noteId);
   };
+  const handlePublic = async (e, noteid) => {
+    e.stopPropagation();
+    await fetch(
+      `${process.env.REACT_APP_BACKEND}/users/${user.username}/${noteid}/public`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: user.token,
+        },
+      }
+    )
+      .then(() => {
+        getNotes();
+      })
+      .catch((error) => console.error(error.message));
+  };
 
   return (
     <div className="notes-page">
@@ -141,7 +158,10 @@ const NotesPage = () => {
                     {note.categoryName}
                   </button>
                   <div className="options-section">
-                    <button className="public-icon">
+                    <button
+                      className="public-icon"
+                      onClick={(e) => handlePublic(e, note.id)}
+                    >
                       {note.public ? <PublicIcon /> : <PrivateIcon />}
                     </button>
 
