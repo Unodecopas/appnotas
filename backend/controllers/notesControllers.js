@@ -26,7 +26,7 @@ const getNote = async (req, res, next) => {
     const { id } = req.info;
     const { noteID } = req.params;
     const [note] = await conexion.query(
-      `select title, description, img, categories.name from notes inner join categories on notes.categoryID = categories.id where notes.id = ? and userID = ? and public = true `,
+      `select title, description, img, categories.name as category from notes inner join categories on notes.categoryID = categories.id where notes.id = ? and userID = ? and public = true `,
       [noteID, id]
     );
     if (note.length == 0) throw generateError(400, "URL invalida");
