@@ -56,7 +56,7 @@ const NoteForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} method="POST">
+    <form onSubmit={handleSubmit}>
       <input
         name="title"
         placeholder="Añade un titulo"

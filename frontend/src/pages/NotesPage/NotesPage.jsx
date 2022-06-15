@@ -67,6 +67,26 @@ const NotesPage = () => {
       })
       .catch((error) => console.error(error.message));
   };
+  const updateNote = async (e, noteId) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    await fetch(
+      `${process.env.REACT_APP_BACKEND}/users/${user.username}/${noteId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: user.token,
+        },
+        body: JSON.stringify(Object.fromEntries(data)),
+      }
+    )
+      .then(() => {
+        getNotes();
+      })
+      .catch((error) => console.error(error.message));
+    closeModal();
+  };
 
   useEffect(() => {
     if (user) {
@@ -137,7 +157,10 @@ const NotesPage = () => {
         handleClose={closeModal}
         borderColor={getCategoryColor(selectedNote?.categoryId)}
       >
-        <NoteForm onSubmit={createNote} selectedNote={selectedNote}></NoteForm>
+        <NoteForm
+          onSubmit={(e) => updateNote(e, selectedNote?.id)}
+          selectedNote={selectedNote}
+        ></NoteForm>
       </Modal>
     </div>
   );
