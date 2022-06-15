@@ -4,6 +4,8 @@ import NoteForm from "../../components/NoteForm/NoteForm";
 import { useUser } from "../../context/userContext";
 import { getCategoryColor } from "../../utils/utils";
 import { ReactComponent as TrashcanIcon } from "../../assets/trashcan.svg";
+import { ReactComponent as PublicIcon } from "../../assets/eye.svg";
+import { ReactComponent as PrivateIcon } from "../../assets/closedEye.svg";
 import "./notesPage.css";
 const NotesPage = () => {
   const [notes, setNotes] = useState([]);
@@ -25,7 +27,6 @@ const NotesPage = () => {
       );
       if (res.ok) {
         const data = await res.json();
-
         setNotes(data);
       }
     } catch (error) {
@@ -67,6 +68,26 @@ const NotesPage = () => {
       })
       .catch((error) => console.error(error.message));
   };
+  const updateNote = async (e, noteId) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    await fetch(
+      `${process.env.REACT_APP_BACKEND}/users/${user.username}/${noteId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: user.token,
+        },
+        body: JSON.stringify(Object.fromEntries(data)),
+      }
+    )
+      .then(() => {
+        getNotes();
+      })
+      .catch((error) => console.error(error.message));
+    closeModal();
+  };
 
   useEffect(() => {
     if (user) {
@@ -86,6 +107,23 @@ const NotesPage = () => {
   const handleDeleteButton = (e, noteId) => {
     e.stopPropagation();
     deleteNote(noteId);
+  };
+  const handlePublic = async (e, noteid) => {
+    e.stopPropagation();
+    await fetch(
+      `${process.env.REACT_APP_BACKEND}/users/${user.username}/${noteid}/public`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: user.token,
+        },
+      }
+    )
+      .then(() => {
+        getNotes();
+      })
+      .catch((error) => console.error(error.message));
   };
 
   return (
@@ -119,12 +157,21 @@ const NotesPage = () => {
                   >
                     {note.categoryName}
                   </button>
-                  <button
-                    className="delete-button"
-                    onClick={(e) => handleDeleteButton(e, note.id)}
-                  >
-                    <TrashcanIcon />
-                  </button>
+                  <div className="options-section">
+                    <button
+                      className="public-icon"
+                      onClick={(e) => handlePublic(e, note.id)}
+                    >
+                      {note.public ? <PublicIcon /> : <PrivateIcon />}
+                    </button>
+
+                    <button
+                      className="delete-button"
+                      onClick={(e) => handleDeleteButton(e, note.id)}
+                    >
+                      <TrashcanIcon />
+                    </button>
+                  </div>
                 </section>
               </li>
             );
@@ -137,7 +184,10 @@ const NotesPage = () => {
         handleClose={closeModal}
         borderColor={getCategoryColor(selectedNote?.categoryId)}
       >
-        <NoteForm onSubmit={createNote} selectedNote={selectedNote}></NoteForm>
+        <NoteForm
+          onSubmit={(e) => updateNote(e, selectedNote?.id)}
+          selectedNote={selectedNote}
+        ></NoteForm>
       </Modal>
     </div>
   );

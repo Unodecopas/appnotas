@@ -25,6 +25,7 @@ const {
   createNote,
   deleteNote,
   setPublic,
+  updateNote,
 } = require("./controllers/notesControllers");
 
 const swaggerUI = require("swagger-ui-express");
@@ -45,12 +46,20 @@ app.get("/users/:username", userExists, isAuth, hasPrivileges, getNotes);
 app.post("/users/:username", userExists, isAuth, createNote);
 app.get("/users/:username/:noteID", userExists, noteExists, getNote);
 app.patch(
-  "/:username/:noteID/public",
+  "/users/:username/:noteID/public",
   userExists,
   noteExists,
   isAuth,
   hasPrivileges,
   setPublic
+);
+app.patch(
+  "/users/:username/:noteID",
+  userExists,
+  noteExists,
+  isAuth,
+  hasPrivileges,
+  updateNote
 );
 app.delete(
   "/users/:username/:noteID",

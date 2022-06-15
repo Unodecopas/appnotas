@@ -55,9 +55,13 @@
   border: 2px solid rgb(72, 175, 235);
 }
 
-.note button.delete-button svg {
+.note button.delete-button svg,
+.note button.public-icon svg {
   width: 15px;
   height: 15px;
+}
+.note button.public-icon svg {
+  fill: white;
 }
 
 .buttons-section {
