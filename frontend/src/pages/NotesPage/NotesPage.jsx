@@ -4,6 +4,8 @@ import NoteForm from "../../components/NoteForm/NoteForm";
 import { useUser } from "../../context/userContext";
 import { getCategoryColor } from "../../utils/utils";
 import { ReactComponent as TrashcanIcon } from "../../assets/trashcan.svg";
+import { ReactComponent as PublicIcon } from "../../assets/eye.svg";
+import { ReactComponent as PrivateIcon } from "../../assets/closedEye.svg";
 import "./notesPage.css";
 const NotesPage = () => {
   const [notes, setNotes] = useState([]);
@@ -25,7 +27,6 @@ const NotesPage = () => {
       );
       if (res.ok) {
         const data = await res.json();
-
         setNotes(data);
       }
     } catch (error) {
@@ -139,12 +140,18 @@ const NotesPage = () => {
                   >
                     {note.categoryName}
                   </button>
-                  <button
-                    className="delete-button"
-                    onClick={(e) => handleDeleteButton(e, note.id)}
-                  >
-                    <TrashcanIcon />
-                  </button>
+                  <div className="options-section">
+                    <button className="public-icon">
+                      {note.public ? <PublicIcon /> : <PrivateIcon />}
+                    </button>
+
+                    <button
+                      className="delete-button"
+                      onClick={(e) => handleDeleteButton(e, note.id)}
+                    >
+                      <TrashcanIcon />
+                    </button>
+                  </div>
                 </section>
               </li>
             );

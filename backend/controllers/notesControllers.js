@@ -8,7 +8,7 @@ const getNotes = async (req, res, next) => {
   try {
     const { id } = req.info;
     const [notes] = await conexion.query(
-      "select notes.id, title, description, img, categories.name AS categoryName, categories.id AS categoryId from notes inner join categories on notes.categoryID = categories.id where userID=?",
+      "select notes.id, title, public, description, img, categories.name AS categoryName, categories.id AS categoryId from notes inner join categories on notes.categoryID = categories.id where userID=?",
       [id]
     );
     res.send(notes);
@@ -26,7 +26,7 @@ const getNote = async (req, res, next) => {
     const { id } = req.info;
     const { noteID } = req.params;
     const [note] = await conexion.query(
-      `select title, description, img, categories.name from notes inner join categories on notes.categoryID = categories.id where notes.id = ? and userID = ? `,
+      `select title, description, img, categories.name from notes inner join categories on notes.categoryID = categories.id where notes.id = ? and userID = ? and public = true `,
       [noteID, id]
     );
     if (note.length == 0) throw generateError(400, "URL invalida");
