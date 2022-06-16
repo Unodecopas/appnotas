@@ -5,8 +5,7 @@
   align-items: center;
   justify-content: space-between;
   font-size: 1rem;
-
-  padding: 0 5rem;
+  padding: 0 1rem;
 }
 
 .header-container__user-area {
@@ -18,4 +17,12 @@
 .header-container .register {
   background-color: #ccc;
   color: #111;
+}
+@media screen and (max-width: 375px) {
+  .header-container {
+    font-size: 0.8rem;
+  }
+  .header-container__user-area p {
+    display: none;
+  }
 }

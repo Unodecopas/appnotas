@@ -22,7 +22,6 @@ const NoteForm = (props) => {
 
   useEffect(() => {
     getCategoriesList().then((response) => {
-      console.log(response);
       setCategoriesList(response);
     });
   }, [getCategoriesList]);
@@ -77,9 +76,11 @@ const NoteForm = (props) => {
           );
         })}
       </select>
-      <input
+      <textarea
+        rows="5"
+        maxLength="200"
         name="description"
-        placeholder="Añade una descripcion"
+        placeholder="Añade una descripcion (max. 200)"
         value={description}
         onChange={handleDescriptionChange}
       />

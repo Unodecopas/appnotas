@@ -23,12 +23,10 @@ const LoginForm = () => {
       });
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
         setUser(data);
       } else {
         const err = await res.json();
         setError(err.message);
-        console.log(err.message);
       }
     } catch (error) {
       console.log(error.message);
