@@ -22,7 +22,6 @@ const NoteForm = (props) => {
 
   useEffect(() => {
     getCategoriesList().then((response) => {
-      console.log(response);
       setCategoriesList(response);
     });
   }, [getCategoriesList]);
