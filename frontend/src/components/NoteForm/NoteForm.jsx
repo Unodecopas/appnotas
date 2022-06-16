@@ -79,6 +79,7 @@ const NoteForm = (props) => {
       </select>
       <textarea
         rows="5"
+        maxLength="200"
         name="description"
         placeholder="Añade una descripcion (max. 200)"
         value={description}
