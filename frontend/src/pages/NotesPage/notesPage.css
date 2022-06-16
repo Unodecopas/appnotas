@@ -19,7 +19,7 @@
 
 .create-note-section form {
   margin-bottom: 2rem;
-  width: 50%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -69,10 +69,9 @@
   justify-content: space-between;
   align-items: center;
 }
-button.REACT {
-  background-color: rgb(72, 175, 235);
-}
 
-button.NODE {
-  background-color: rgb(40, 233, 82);
+@media screen and (min-width: 768px) {
+  .create-note-section form {
+    width: 50%;
+  }
 }
