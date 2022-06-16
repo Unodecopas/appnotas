@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useUser } from "../../context/userContext";
 
 const NoteForm = (props) => {
   const [categoriesList, setCategoriesList] = useState([]);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [user] = useUser();
 
   const getCategoriesList = useCallback(async () => {
     try {
@@ -85,6 +87,15 @@ const NoteForm = (props) => {
         onChange={handleDescriptionChange}
       />
       <button type="submit">{props.selectedNote ? "Editar" : "Añadir"}</button>
+      {props.selectedNote && (
+        <p>
+          {window.location.href +
+            "users/" +
+            user.username +
+            "/" +
+            props.selectedNote.id}
+        </p>
+      )}
     </form>
   );
 };

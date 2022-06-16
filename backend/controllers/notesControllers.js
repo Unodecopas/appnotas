@@ -29,7 +29,7 @@ const getNote = async (req, res, next) => {
       `select title, description, img, categories.name as category from notes inner join categories on notes.categoryID = categories.id where notes.id = ? and userID = ? and public = true `,
       [noteID, id]
     );
-    if (note.length == 0) throw generateError(400, "URL invalida");
+    if (note.length == 0) throw generateError(400, "Esta nota no es pública");
     res.send(note[0]);
   } catch (error) {
     logger.error("getNote");

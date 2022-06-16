@@ -25,13 +25,13 @@ const Header = () => {
         {user ? (
           <>
             <p>{user.username}</p>
-            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleLogout}>Cerrar Sesión</button>
           </>
         ) : (
           <>
-            <Link to="/login">Login</Link>
+            <Link to="/login">Iniciar Sesión</Link>
             <button className="register" onClick={handleSingUp}>
-              Sign Up
+              Registro
             </button>
           </>
         )}

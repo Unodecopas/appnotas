@@ -43,7 +43,7 @@ const LoginForm = () => {
             type="text"
             name="username"
             id="username"
-            placeholder="username"
+            placeholder="usuario"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -53,12 +53,12 @@ const LoginForm = () => {
             type="password"
             name="password"
             id="password"
-            placeholder="password"
+            placeholder="contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button>Login</button>
+        <button>Inicia Sesión</button>
       </form>
       <Link to="/register">¿No estás registrado? ¡Regístrate!</Link>
     </section>

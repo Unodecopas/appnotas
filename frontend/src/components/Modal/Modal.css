@@ -54,6 +54,9 @@
   font-family: inherit;
   border-radius: 10px;
 }
+.modal form p {
+  overflow-wrap: break-word;
+}
 @media screen and (max-width: 500px) {
   .modal {
     height: 70%;

@@ -44,7 +44,7 @@ const RegisterForm = () => {
             type="text"
             name="username"
             id="username"
-            placeholder="username"
+            placeholder="usuario"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -54,7 +54,7 @@ const RegisterForm = () => {
             type="password"
             name="password"
             id="password"
-            placeholder="password"
+            placeholder="contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -74,7 +74,7 @@ const RegisterForm = () => {
             type="text"
             name="name"
             id="name"
-            placeholder="name"
+            placeholder="nombre"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -84,7 +84,7 @@ const RegisterForm = () => {
             type="text"
             name="lastname"
             id="lastname"
-            placeholder="lastname"
+            placeholder="apellido"
             value={lastname}
             onChange={(e) => setLastname(e.target.value)}
           />

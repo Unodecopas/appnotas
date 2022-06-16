@@ -7,6 +7,7 @@ import "./singleNote.css";
 const SingleNote = () => {
   const { username, noteid } = useParams();
   const [note, setNote] = useState();
+  const [error, setError] = useState();
   useEffect(() => {
     const getNote = async () => {
       const res = await fetch(
@@ -15,6 +16,9 @@ const SingleNote = () => {
       if (res.ok) {
         const data = await res.json();
         setNote(data);
+      } else {
+        const data = await res.json();
+        setError(data);
       }
     };
     getNote();
@@ -29,6 +33,12 @@ const SingleNote = () => {
           <p>{note.description}</p>
           <h3>Categoría</h3>
           <p>{note.category}</p>
+        </>
+      )}
+      {error && (
+        <>
+          <h2>Oooups! Algo ha fallado!</h2>
+          <p>{error.message}</p>
         </>
       )}
     </section>
